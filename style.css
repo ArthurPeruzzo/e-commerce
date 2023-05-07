@@ -140,3 +140,45 @@
 
 
   /* fim menu */
+
+  /* rodape */
+  .footer {
+    background-color: var(--preto);
+    color: var(--branco);
+    padding: 30px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .footer h4 {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer ul li a {
+    color: var(--branco);
+    text-decoration: none;
+  }
+  
+  .footer img {
+    max-width: 100px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .footer p {
+    margin-bottom: 10px;
+  }
+  
+  /* fim do rodape */
