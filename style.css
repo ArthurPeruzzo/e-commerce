@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 *{
     padding: 0;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 :root {
-    --dark: #131920;
-    --white: #fff;
+    --preto: #131920;
+    --branco: #fff;
+    --azul: #232F3F;
+    --cinza:#dee3ed;
 }
 
 /* cabecalho */
@@ -13,7 +17,10 @@
 .navbar {
     font-size: 1.2rem;
     padding: 0.5rem 1rem;
-    background-color: var(--dark);
+    background-color: var(--preto);
+    min-height: 61px;
+    max-height: 61px;
+    z-index: 1;
   }
 
   .logo-cell-store {
@@ -21,8 +28,9 @@
     height: 30px;
   }
   
-  .navbar-brand {
+  .navbar-marca {
     font-weight: bold;
+    text-decoration: none;
   }
   
   .nav-link {
@@ -34,8 +42,8 @@
   }
   
   .btn-light {
-    background-color: var(--white);
-    color: var(--dark);
+    background-color: var(--branco);
+    color: var(--preto);
   }
   
   .fa-search {
@@ -47,4 +55,88 @@
   }
 
   /* fim cabecalho */
-  
+
+  /* menu */
+
+  .menu-lateral {
+    position: fixed;
+    background-color: var(--branco);
+    height: 100%;
+    overflow: hidden;
+    display: none;
+    box-shadow: 4px 0 10px 0 rgba(0,0,0,.4);
+    will-change: transform;
+    top: 0px;
+    width: 0px;
+    z-index: 2;
+  }
+
+  .menu-lateral ul {
+    padding-left: 0px;
+}
+
+  .menu-lateral ul li {
+      list-style-type: none;
+      padding-bottom: 10px;
+      height: 42px;
+      padding-left: 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 7px;
+  }
+
+.menu-lateral ul li:hover {
+  background-color: var(--cinza);
+}
+
+.menu-lateral ul li i {
+  margin-right: 20px;
+}
+
+  .menu-lateral-boas-vindas {
+    background-color: var(--azul);
+    height: 50px;
+    margin-bottom: 20px;
+  }
+
+  .menu-opcao {
+    padding-left: 13px;
+    top: 61px;
+    background-color: var(--azul);
+    height: 39px;
+    max-height: 39px;
+  }
+
+  .todos-produtos {
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .borda-menu-opcao:hover {
+    border: 1px solid var(--branco);
+    border-radius: 4px;
+    height: 100%;
+  }
+
+  .descricao-produto {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .menu-segundo-nivel {
+    position: fixed;
+    background-color: var(--branco);
+    height: 100%;
+    overflow: hidden;
+    display: none;
+    box-shadow: 4px 0 10px 0 rgba(0,0,0,.4);
+    will-change: transform;
+    top: 0px;
+    width: 0px;
+    z-index: 3;
+  }
+
+
+
+  /* fim menu */
