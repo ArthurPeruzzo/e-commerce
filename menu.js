@@ -46,4 +46,8 @@ $(document).ready(mostraMenuLateral());
       }, 150);
     });
   }
+
+  $('#comprar').click(function() {
+    window.location.href = '/paginaProduto/paginaProduto.html';
+  });
   
