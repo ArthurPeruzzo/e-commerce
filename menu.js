@@ -50,4 +50,9 @@ $(document).ready(mostraMenuLateral());
   $('#comprar').click(function() {
     window.location.href = '/paginaProduto/paginaProduto.html';
   });
+
+  
+  $('#cadastrar').click(function() {
+    window.location.href = '/cadastro/cadastro.html';
+  });
   
