@@ -1,4 +1,15 @@
-$(document).ready(mostraMenuLateral());
+class Produto {
+  constructor(marca, preco, descontoPreco, quantidade, imagem) {
+      this.marca = marca;
+      this.preco = preco;
+      this.descontoPreco = descontoPreco;
+      this.quantidade = quantidade;
+      this.imagem = imagem;
+  }
+}
+
+
+$(document).ready(mostraMenuLateral(), getNumeroDeProdutosNoCarrinho());
 
   $(document).ready(mostraMenuSegundoNivel());
 
@@ -47,7 +58,9 @@ $(document).ready(mostraMenuLateral());
     });
   }
 
-  $('#comprar').click(function() {
+  $('#comprar').click(adicionaProdutoNoCarrinho);
+
+  $('#imagem').click(function() {
     window.location.href = '/paginaProduto/paginaProduto.html';
   });
 
@@ -55,4 +68,42 @@ $(document).ready(mostraMenuLateral());
   $('#cadastrar').click(function() {
     window.location.href = '/cadastro/cadastro.html';
   });
+
+  $('#carrinho').click(function() {
+    window.location.href = '/carrinho/carrinho.html';
+  });
+
+
+  function getNumeroDeProdutosNoCarrinho() {
+    const numeroProduto = document.getElementById("numero-produto");
+    if (isCarrinhoVazio()) {
+      numeroProduto.innerText = 0;
+    } else {
+      numeroProduto.innerText = countItensCarrinhos();
+    }
+  }
+
+  function isCarrinhoVazio() {
+    return !localStorage.getItem("cartItems");
+  }
+
+  function countItensCarrinhos() {
+    if (isCarrinhoVazio()) return 0;
+    return getItensCarrinho().length;
+  }
+
+  function getItensCarrinho() {
+    return JSON.parse(localStorage.getItem("cartItems")) || [];
+  }
+
+  function adicionaProdutoNoCarrinho() {
+    const itens = getItensCarrinho();
+
+
+
+    const produto = new Produto("Exemplo", 60.00, 20.00, 3, "/imagens/galaxy2Grande.jpg");
+    itens.push(produto);
+    localStorage.setItem('cartItems', JSON.stringify(itens));
+
+  }
   

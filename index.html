@@ -35,8 +35,9 @@
                 <a id="cadastrar" class="nav-link" href="#">Cadastrar</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a id="carrinho" class="nav-link" href="#">
                   <i class="fas fa-shopping-cart"></i>
+                  <span id="numero-produto" class="badge badge-danger">0</span>
                 </a>
               </li>
             </ul>
@@ -107,7 +108,7 @@
           <div class="row">
             <div class="col-lg-3 col-md-6 mb-4">
               <div class="card h-100">
-                <img class="card-img-top" src="/imagens/samsumg-galaxy.jpg" alt="Imagem do Produto">
+                <img id="imagem" class="card-img-top" src="/imagens/samsumg-galaxy.jpg" alt="Imagem do Produto">
                 <div class="card-body">
                   <h4 class="card-titulo">Samsung Galaxy</h4>
                   <h5 class="preco-produto">R$ 999,99</h5>
@@ -191,6 +192,7 @@
       </footer>
 
 
-<script src="./menu.js"></script>
+<script type="module" src="./carrinho/produto.js"></script>
+<script type="module" src="./index.js"></script>
 </body>
 </html>
