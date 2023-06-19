@@ -28,10 +28,19 @@
   .form-control {
     padding: 8px;
     border: 1px solid #ccc;
+    margin-bottom: 10px;
   }
   
   .btn {
     padding: 10px 20px;
     cursor: pointer;
   }
+
+.errofont{
+    color: #f00;
+}
+
+.erroinput{
+    border: solid 1px #F00;
+}
   
