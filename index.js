@@ -1,5 +1,6 @@
-class Produto {
-  constructor(marca, preco, descontoPreco, quantidade, imagem) {
+class Item {
+  constructor(id, marca, preco, descontoPreco, quantidade, imagem) {
+      this.id = id;
       this.marca = marca;
       this.preco = preco;
       this.descontoPreco = descontoPreco;
@@ -7,6 +8,11 @@ class Produto {
       this.imagem = imagem;
   }
 }
+
+const mapaDosItens = new Map([[1, new Item(1, "Samsung Galaxy", 999.99, 20.00, 1, "/imagens/galaxy2Grande.jpg")],
+                                [2, new Item(2, "Xiaomi Redmi 9A", 1299.99, 20.00, 1, "/imagens/xiaomi.jpg")],
+                                [3, new Item(3, "Iphone 13", 1599.99, 20.00, 1, "/imagens/iphone.jpg")],
+                                [4, new Item(4, "Samsung Galaxy S21", 899.99, 20.00, 1, "/imagens/samsumg-galaxy2.jpg")]]);
 
 
 $(document).ready(mostraMenuLateral(), getNumeroDeProdutosNoCarrinho());
@@ -58,7 +64,21 @@ $(document).ready(mostraMenuLateral(), getNumeroDeProdutosNoCarrinho());
     });
   }
 
-  $('#comprar').click(adicionaProdutoNoCarrinho);
+  $('#comprar-1').click(function () {
+    adicionaProdutoNoCarrinho(1)
+  });
+
+  $('#comprar-2').click(function () {
+    adicionaProdutoNoCarrinho(2)
+  });
+
+  $('#comprar-3').click(function() {
+    adicionaProdutoNoCarrinho(3)
+  });
+
+  $('#comprar-4').click(function() {
+    adicionaProdutoNoCarrinho(4)
+  });
 
   $('#imagem').click(function() {
     window.location.href = '/paginaProduto/paginaProduto.html';
@@ -93,17 +113,21 @@ $(document).ready(mostraMenuLateral(), getNumeroDeProdutosNoCarrinho());
   }
 
   function getItensCarrinho() {
-    return JSON.parse(localStorage.getItem("cartItems")) || [];
+    return JSON.parse(localStorage.getItem("cartItems"));
   }
 
-  function adicionaProdutoNoCarrinho() {
-    const itens = getItensCarrinho();
+  function adicionaProdutoNoCarrinho(numero) {
+    const itens = getItensCarrinho() || [];
+    let itemMap = mapaDosItens.get(numero);
 
-
-
-    const produto = new Produto("Exemplo", 60.00, 20.00, 3, "/imagens/galaxy2Grande.jpg");
-    itens.push(produto);
-    localStorage.setItem('cartItems', JSON.stringify(itens));
-
+    if (itens.some(item => itemMap.id === item.id)) {
+      alert("Item já adicionado no carrinho!")
+    }  
+    else {
+        itens.push(itemMap);
+        localStorage.setItem('cartItems', JSON.stringify(itens));
+        alert("Item adicionado no carrinho!")
+        getNumeroDeProdutosNoCarrinho();
+      }
   }
   

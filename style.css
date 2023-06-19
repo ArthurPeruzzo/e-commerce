@@ -175,6 +175,7 @@ body {
     background-color: var(--laranja);
     font-weight: bold;
     color: var(--pretoDefault);
+    cursor: pointer;
   }
   
   .botao-comprar:hover {
@@ -185,6 +186,7 @@ body {
     object-fit: scale-down;
     height: 218px;
     background-color: var(--cinzaClaro);
+    cursor: pointer;
   }
   
   

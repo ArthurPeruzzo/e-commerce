@@ -20,8 +20,8 @@ function updateCartCount() {
       productElem.innerHTML = `
         <img src="${item.imagem}" alt="${item.marca}">
         <h3>${item.marca}</h3>
-        <p>Valor Normal: R$ ${item.preco}</p>
-        <p>Valor Promocional: R$ ${item.descontoPreco}</p>
+        <p>Valor: R$ ${item.preco}</p>
+        <p>Desconto: R$ ${item.descontoPreco}</p>
         <input type="number" min="1" value="${item.quantidade}" data-index="${item.index}" class="quantity-input">
       `;
   
