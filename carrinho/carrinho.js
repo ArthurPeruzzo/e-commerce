@@ -1,20 +1,17 @@
-// carrinho.js
 
-// Função para atualizar a quantidade de itens no carrinho
-function updateCartCount() {
+function atualizaQuantidadeItensNoCarrinho() {
     const cartCountElem = document.getElementById('cart-count');
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     cartCountElem.innerText = cartItems.length.toString();
   }
   
-  // Função para exibir os produtos adicionados no carrinho
-  function displayCartItems() {
+  function mostraItens() {
     const cartItemsElem = document.getElementById('cart-items');
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
   
     cartItemsElem.innerHTML = '';
   
-    cartItems.forEach(item => {
+    cartItems.forEach((item, index) => {
       const productElem = document.createElement('div');
       productElem.classList.add('product');
       productElem.innerHTML = `
@@ -22,122 +19,80 @@ function updateCartCount() {
         <h3>${item.marca}</h3>
         <p>Valor: R$ ${item.preco}</p>
         <p>Desconto: R$ ${item.descontoPreco}</p>
-        <input type="number" min="1" value="${item.quantidade}" data-index="${item.index}" class="quantity-input">
+        <input type="number" min="1" value="${item.quantidade}" data-index="${index}" class="quantidade-input">
       `;
   
       cartItemsElem.appendChild(productElem);
     });
   
-    // Adicionar evento de alteração de quantidade de produto
-    const quantityInputs = document.getElementsByClassName('quantity-input');
-    Array.from(quantityInputs).forEach(input => {
-      input.addEventListener('change', updateCartItemQuantity);
+    const quantidadeInputs = document.getElementsByClassName('quantidade-input');
+    Array.from(quantidadeInputs).forEach(input => {
+      input.addEventListener('change', updateQuantidade);
     });
   }
-
-  // const exampleProduct = {
-  //   marca: "Exemplo",
-  //   description: "Produto de exemplo",
-  //   preco: 50.00,
-  //   descontoPreco: 40.00,
-  //   quantidade: 2,
-  //   imagem: "/imagens/galaxy2Grande.jpg"
-  // };
-
-  // const exampleProduct2 = {
-  //   marca: "Exemplo",
-  //   preco: 50.00,
-  //   descontoPreco: 40.00,
-  //   quantidade: 2,
-  //   imagem: "/imagens/galaxy2Grande.jpg"
-  // };
-
-  // const exampleProduct3 = {
-  //   marca: "Exemplo",
-  //   preco: 50.00,
-  //   descontoPreco: 40.00,
-  //   quantidade: 2,
-  //   imagem: "/imagens/galaxy2Grande.jpg"
-  // };
-
-  // const exampleProduct4 = {
-  //   marca: "Exemplo",
-  //   preco: 50.00,
-  //   descontoPreco: 40.00,
-  //   quantidade: 2,
-  //   imagem: "/imagens/galaxy2Grande.jpg"
-  // };
   
-  // Verificar se há itens no localStorage, se não, adicionar o produto de exemplo
-    // localStorage.setItem('cartItems', JSON.stringify([exampleProduct, exampleProduct2, exampleProduct3, exampleProduct4]));
+  atualizaQuantidadeItensNoCarrinho();
+  mostraItens();
+  atualizaTotalizador();
   
-  // Chamar as funções para atualizar a exibição
-  updateCartCount();
-  displayCartItems();
-  updateCartSummary();
-  
-  // Função para atualizar a quantidade de um produto no carrinho
-  function updateCartItemQuantity(event) {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  function updateQuantidade(event) {
+    const itens = JSON.parse(localStorage.getItem('cartItems')) || [];
     const index = parseInt(event.target.dataset.index);
     const quantidade = parseInt(event.target.value);
   
-    if (quantidade <= 0) {
-      // Remover o produto do carrinho se a quantidade for menor ou igual a zero
-      cartItems.splice(index, 1);
+    if (quantidade <= 0 || !quantidade) {
+      itens.splice(index, 1);
     } else {
-      // Atualizar a quantidade do produto
-      cartItems[index].quantidade = quantidade;
+      itens[index].quantidade = quantidade;
     }
   
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    updateCartCount();
-    displayCartItems();
-    updateCartSummary();
+    localStorage.setItem('cartItems', JSON.stringify(itens));
+    atualizaQuantidadeItensNoCarrinho();
+    mostraItens();
+    atualizaTotalizador();
   }
   
   // Função para calcular e exibir o resumo da compra
-  function updateCartSummary() {
+  function atualizaTotalizador() {
     const subtotalElem = document.getElementById('subtotal');
-    const discountsElem = document.getElementById('discounts');
+    const descontoElem = document.getElementById('discounts');
     const totalElem = document.getElementById('total');
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
   
     let subtotal = 0;
-    let discounts = 0;
+    let descontos = 0;
   
     cartItems.forEach(item => {
       subtotal += item.preco * item.quantidade;
-      discounts += (item.preco - item.descontoPreco) * item.quantidade;
+      descontos += item.descontoPreco * item.quantidade;
     });
   
-    const total = subtotal - discounts;
+    const total = subtotal - descontos;
   
     subtotalElem.innerText = `R$ ${subtotal.toFixed(2)}`;
-    discountsElem.innerText = `R$ ${discounts.toFixed(2)}`;
+    descontoElem.innerText = `R$ ${descontos.toFixed(2)}`;
     totalElem.innerText = `R$ ${total.toFixed(2)}`;
   }
   
-  // Função para finalizar a compra
-  function checkout() {
-    // Implemente a lógica para finalizar a compra
-    // Pode ser redirecionar o usuário para uma página de pagamento, por exemplo
+  function finalizarCompra() {
     alert('Compra finalizada com sucesso!');
     localStorage.removeItem('cartItems');
-    updateCartCount();
-    displayCartItems();
-    updateCartSummary();
+    atualizaQuantidadeItensNoCarrinho();
+    mostraItens();
+    atualizaTotalizador();
   }
   
-  // Adicionar evento de clique ao botão de finalizar compra
-  const checkoutBtn = document.getElementById('checkout-btn');
-  checkoutBtn.addEventListener('click', checkout);
+  const finalizarCompraBtn = document.getElementById('checkout-btn');
+  finalizarCompraBtn.addEventListener('click', finalizarCompra);
   
-  // Atualizar a quantidade de itens no carrinho ao carregar a página
-  updateCartCount();
+  atualizaQuantidadeItensNoCarrinho();
+  mostraItens();
+  atualizaTotalizador();
+
+  const continuarComprandoBtn = document.getElementById('continuar-comprando-btn');
+  continuarComprandoBtn.addEventListener('click', continuarComprando);
   
-  // Exibir os produtos adicionados e atualizar o resumo da compra
-  displayCartItems();
-  updateCartSummary();
-  
+  function continuarComprando() {
+    window.location.href = '/index.html';
+  }
   
