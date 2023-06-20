@@ -15,6 +15,11 @@ const mapaDosItens = new Map([[1, new Item(1, "Samsung Galaxy", 999.99, 20.00, 1
                                 [4, new Item(4, "Samsung Galaxy S21", 899.99, 20.00, 1, "/imagens/samsumg-galaxy2.jpg")]]);
 
 
+window.onload = function () {
+  const footer = document.getElementById("footerComponent");
+  footer.innerHTML = footerComponent();
+}
+
 $(document).ready(mostraMenuLateral(), getNumeroDeProdutosNoCarrinho());
 
   $(document).ready(mostraMenuSegundoNivel());
@@ -130,4 +135,34 @@ $(document).ready(mostraMenuLateral(), getNumeroDeProdutosNoCarrinho());
         getNumeroDeProdutosNoCarrinho();
       }
   }
+
+  export const footerComponent = function(){
+    return `
+    <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#">Institucional</a></li>
+          <li><a href="#">Dúvidas</a></li>
+          <li><a href="#">Cartão</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h4>Formas de pagamento</h4>
+        <img src="imagens/visa.png" alt="visa">
+        <img src="imagens/mastercard-logo.png" alt="mastercard">
+        <img src="imagens/boleto-logo.png" alt="Boleto">
+      </div>
+      <div class="col-md-4">
+        <h4>Informações da loja</h4>
+        <p>CNPJ: 00.000.000/0000-00</p>
+        <p>Inscrição estadual: 000.000.000.000</p>
+        <p>Endereço: Rua Lorem Ipsum, 123 - São Paulo/SP</p>
+        <p>E-mail: atendimento@loja.com.br</p>
+      </div>
+    </div>
+  </div>
+    `;
+ };
   
